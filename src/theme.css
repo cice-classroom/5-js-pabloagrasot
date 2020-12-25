@@ -1,0 +1,13 @@
+:root {
+  --base: 0.25rem;
+  --body-width: 75rem;
+  --s-width: calc(var(--base) * 2);
+  --m-width: calc(var(--base) * 4);
+  --l-width: calc(var(--base) * 8);
+  --xl-width: calc(var(--base) * 12);
+
+  --primary-color: rgba(255, 255, 255);
+  --bk-color: rgba(33, 31, 30, 10);
+  --front-color: rgb(78, 110, 107, 43);
+  --shadow: 0 0.2rem 0.4rem 0 rgba(0, 0, 0, 0.2);
+}
