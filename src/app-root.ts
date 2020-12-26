@@ -6,13 +6,12 @@ export class AppRoot extends LitElement {
   static get styles() {
     return css`
       h1 {
-        font-size: 4rem;
         color: var(--front-color);
       }
     `;
   }
 
   render() {
-    return html` <h1>TIC TAC TOE</h1> `;
+    return html`<h1>TIC TAC TOE</h1>`;
   }
 }
