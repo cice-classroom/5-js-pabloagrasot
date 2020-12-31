@@ -9,5 +9,5 @@
   --primary-color: rgba(255, 255, 255);
   --bk-color: rgba(33, 31, 30, 10);
   --front-color: rgb(78, 110, 107, 43);
-  --shadow: 0 0 3px 1px rgba(255, 255, 255, 0.575);
+  --shadow: 0 0 15px 3px rgba(255, 255, 255, 0.575);
 }
