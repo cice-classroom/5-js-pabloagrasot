@@ -7,14 +7,22 @@ import {
   eventOptions,
 } from 'lit-element';
 
+import type { Player } from './player';
+
 @customElement('board-app')
 export class BoardApp extends LitElement {
+  @property({ type: String })
+  cell!: string;
+  boardClass: string = '';
+  css: string = '';
+  player: Player | undefined;
   @property({ type: Array })
   board = ['', '', '', '', '', '', '', '', ''];
-  @property({ type: String })
-  cell: 'X' | 'O' | undefined;
+
   @property({ type: Number })
   turn = 0;
+  valor = 0;
+  cellNumber = 0;
   @property({ type: Boolean })
   clicked = false;
 
@@ -43,29 +51,123 @@ export class BoardApp extends LitElement {
       .cell {
         background-color: var(--primary-color);
         background-color: var(--bk-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        font-weight: 900;
+        text-align: center;
+        font-size: 80px;
+      }
+
+      .cell.x,
+      .cell.O {
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+      .cell.X::before,
+      .cell.X::after,
+      .cell.O::before {
+        background-color: white;
+      }
+
+      .board.X .cell:not(.X):not(.O):hover::before,
+      .board.X .cell:not(.X):not(.O):hover::after,
+      .board.O .cell:not(.X):not(.O):hover::before {
+        background-color: lightgrey;
+      }
+
+      .cell.X::before,
+      .cell.X::after,
+      .board.X .cell:not(.X):not(.O):hover::before,
+      .board.X .cell:not(.X):not(.O):hover::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 90px;
+      }
+
+      .cell.X::before,
+      .board.X .cell:not(.X):not(.O):hover::before {
+        transform: rotate(45deg);
+      }
+
+      .cell.X::after,
+      .board.X .cell:not(.X):not(.O):hover::after {
+        transform: rotate(-45deg);
+      }
+
+      .cell.O::before,
+      .cell.O::after,
+      .board.O .cell:not(.X):not(.O):hover::before,
+      .board.O .cell:not(.X):not(.O):hover::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .cell.O::before,
+      .board.O .cell:not(.X):not(.O):hover::before {
+        width: 60px;
+        height: 80px;
+      }
+
+      .cell.O::after,
+      .board.O .cell:not(.X):not(.O):hover::after {
+        width: 40px;
+        height: 60px;
+        background-color: var(--bk-color);
       }
     `;
   }
 
+  @eventOptions({ capture: true, once: true })
+  private _onCellClicked(index: number): void {
+    var cellNumber = `${index}`;
+
+    console.log('el numero de celda es', cellNumber);
+
+    console.log(index);
+    if (this.turn % 2 == 0) {
+      this.board[index] = 'X';
+
+      this.boardClass = 'O';
+      this.turn++;
+      if (this.board[index] === 'X') {
+        this.css = 'X';
+      } else {
+        this.css = '';
+      }
+    } else {
+      this.board[index] = 'O';
+      this.boardClass = 'X';
+      this.turn++;
+
+      if (this.board[index] === 'O') {
+        this.css = 'O';
+      } else {
+        this.css = '';
+      }
+    }
+
+    console.log(this.board);
+  }
+
   render() {
     return html` <section class="table">
-      <div class="board">
+      <div class="board ${this.boardClass}">
         ${this.board.map(
-          () =>
-            html`<div id="${this.id} @click="${this._onCellClicked}"" class="cell">${this.cell}</div>`,
+          (player, index) =>
+            html`<div
+              @click="${() => this._onCellClicked(index)}"
+              id="${index}"
+              class="cell ${this.css}"
+            >
+              ${player}
+            </div>`,
         )}
       </div>
     </section>`;
-  }
-
-  @eventOptions({ capture: true, once: true })
-  private _onCellClicked() {
-    if (this.turn % 2 == 0) {
-      this.cell = 'X';
-      this.turn++;
-    } else {
-      this.cell = 'O';
-      this.turn++;
-    }
   }
 }
