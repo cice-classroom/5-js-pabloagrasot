@@ -12,6 +12,6 @@ export class TicTacToe extends LitElement {
 
   render() {
     return html`<h1>TIC TAC TOE</h1>
-      <board-app></board-app>`;
+      <board-app id="board-app"></board-app>`;
   }
 }

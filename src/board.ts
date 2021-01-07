@@ -1,1 +1,1 @@
-type Board = {};
+export const board = ['', '', '', '', '', '', '', '', ''];

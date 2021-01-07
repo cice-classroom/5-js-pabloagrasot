@@ -8,16 +8,17 @@ import {
 } from 'lit-element';
 
 import type { Player } from './player';
-
+import { board } from './board';
+import { Game } from './game';
 @customElement('board-app')
 export class BoardApp extends LitElement {
+  private readonly game = new Game();
+
   @property({ type: String })
   cell!: string;
-  boardClass: string = '';
+  boardClass: 'X' | 'O' = 'X';
   css: string = '';
   player: Player | undefined;
-  @property({ type: Array })
-  board = ['', '', '', '', '', '', '', '', ''];
 
   @property({ type: Number })
   turn = 0;
@@ -25,6 +26,10 @@ export class BoardApp extends LitElement {
   cellNumber = 0;
   @property({ type: Boolean })
   clicked = false;
+
+  connectedCallback() {
+    super.connectedCallback();
+  }
 
   static get styles() {
     return css`
@@ -59,110 +64,52 @@ export class BoardApp extends LitElement {
         font-weight: 900;
         text-align: center;
         font-size: 80px;
-      }
-
-      .cell.x,
-      .cell.O {
-        cursor: not-allowed;
         pointer-events: none;
       }
-      .cell.X::before,
-      .cell.X::after,
-      .cell.O::before {
-        background-color: white;
-      }
-
-      .board.X .cell:not(.X):not(.O):hover::before,
-      .board.X .cell:not(.X):not(.O):hover::after,
-      .board.O .cell:not(.X):not(.O):hover::before {
-        background-color: lightgrey;
+      .cell:empty {
+        pointer-events: auto;
       }
 
       .cell.X::before,
-      .cell.X::after,
-      .board.X .cell:not(.X):not(.O):hover::before,
-      .board.X .cell:not(.X):not(.O):hover::after {
-        content: '';
+      .board.X .cell:hover::before {
+        content: 'X';
         position: absolute;
-        width: 20px;
-        height: 90px;
+        color: rgb(220, 220, 220, 0.5);
       }
 
-      .cell.X::before,
-      .board.X .cell:not(.X):not(.O):hover::before {
-        transform: rotate(45deg);
-      }
-
-      .cell.X::after,
-      .board.X .cell:not(.X):not(.O):hover::after {
-        transform: rotate(-45deg);
-      }
-
-      .cell.O::before,
-      .cell.O::after,
-      .board.O .cell:not(.X):not(.O):hover::before,
-      .board.O .cell:not(.X):not(.O):hover::after {
-        content: '';
+      .board.O .cell:hover::before {
+        content: '0';
         position: absolute;
-        border-radius: 50%;
-      }
-
-      .cell.O::before,
-      .board.O .cell:not(.X):not(.O):hover::before {
-        width: 60px;
-        height: 80px;
-      }
-
-      .cell.O::after,
-      .board.O .cell:not(.X):not(.O):hover::after {
-        width: 40px;
-        height: 60px;
-        background-color: var(--bk-color);
+        color: rgb(220, 220, 220, 0.5);
       }
     `;
   }
 
   @eventOptions({ capture: true, once: true })
-  private _onCellClicked(index: number): void {
-    var cellNumber = `${index}`;
-
-    console.log('el numero de celda es', cellNumber);
-
-    console.log(index);
+  private _onCellClicked(index: number) {
     if (this.turn % 2 == 0) {
-      this.board[index] = 'X';
-
+      board[index] = 'X';
       this.boardClass = 'O';
       this.turn++;
-      if (this.board[index] === 'X') {
-        this.css = 'X';
-      } else {
-        this.css = '';
-      }
+      console.log(board[5]);
     } else {
-      this.board[index] = 'O';
+      board[index] = '0';
       this.boardClass = 'X';
       this.turn++;
-
-      if (this.board[index] === 'O') {
-        this.css = 'O';
-      } else {
-        this.css = '';
-      }
     }
 
-    console.log(this.board);
+    this.game.hasWinner();
   }
 
   render() {
     return html` <section class="table">
       <div class="board ${this.boardClass}">
-        ${this.board.map(
+        ${board.map(
           (player, index) =>
             html`<div
               @click="${() => this._onCellClicked(index)}"
               id="${index}"
-              class="cell ${this.css}"
+              class="cell"
             >
               ${player}
             </div>`,
