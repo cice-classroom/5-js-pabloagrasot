@@ -64,7 +64,6 @@ export class BoardApp extends LitElement {
         font-weight: 900;
         text-align: center;
         font-size: 80px;
-        pointer-events: none;
       }
       .cell:empty {
         pointer-events: auto;

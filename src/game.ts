@@ -7,7 +7,6 @@ export class Game {
   valor = 0;
   cellNumber = 0;
   boardClass: 'X' | 'O' = 'X';
-  static winPlayer: unknown;
 
   hasWinner() {
     if (board[0] === board[1] && board[0] === board[2] && board[0] != '') {
