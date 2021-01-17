@@ -1,11 +1,7 @@
 import { customElement, LitElement, html, css, property } from 'lit-element';
-
-import type { board } from './board';
 @customElement('win-app')
 export class Win extends LitElement {
   @property({ type: String })
-  board!: typeof board;
-
   static get styles() {
     return css`
       .winner {

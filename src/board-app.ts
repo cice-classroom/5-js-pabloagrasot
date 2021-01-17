@@ -24,12 +24,6 @@ export class BoardApp extends LitElement {
   turn = 0;
   valor = 0;
   cellNumber = 0;
-  @property({ type: Boolean })
-  clicked = false;
-
-  connectedCallback() {
-    super.connectedCallback();
-  }
 
   static get styles() {
     return css`
@@ -64,6 +58,7 @@ export class BoardApp extends LitElement {
         font-weight: 900;
         text-align: center;
         font-size: 80px;
+        pointer-events: none;
       }
       .cell:empty {
         pointer-events: auto;
@@ -86,33 +81,26 @@ export class BoardApp extends LitElement {
 
   @eventOptions({ capture: true, once: true })
   private _onCellClicked(index: number) {
-    if (this.turn % 2 == 0) {
-      board[index] = 'X';
-      this.boardClass = 'O';
-      this.turn++;
-      console.log(board[5]);
-    } else {
-      board[index] = '0';
-      this.boardClass = 'X';
-      this.turn++;
-    }
-
+    this.turn % 2 ? (board[index] = '0') : (board[index] = 'X');
+    this.turn % 2 ? (this.boardClass = 'X') : (this.boardClass = 'O');
+    this.turn++;
     this.game.hasWinner();
   }
 
   render() {
     return html` <section class="table">
+      <!-- prettier-ignore -->
       <div class="board ${this.boardClass}">
         ${board.map(
-          (player, index) =>
-            html`<div
-              @click="${() => this._onCellClicked(index)}"
-              id="${index}"
-              class="cell"
-            >
-              ${player}
-            </div>`,
-        )}
+        (player, index) =>
+          html`<div
+            @click="${() => this._onCellClicked(index)}"
+            id="${index}"
+            class="cell"
+          >
+            ${player}
+          </div>`,
+      )}
       </div>
     </section>`;
   }

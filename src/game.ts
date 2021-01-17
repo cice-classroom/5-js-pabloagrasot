@@ -1,13 +1,5 @@
 import { board } from './board';
-import type { Player } from './player';
-
 export class Game {
-  player: Player = 'X';
-  turn = 0;
-  valor = 0;
-  cellNumber = 0;
-  boardClass: 'X' | 'O' = 'X';
-
   hasWinner() {
     if (board[0] === board[1] && board[0] === board[2] && board[0] != '') {
       let winPlayer = board[0];
@@ -48,6 +40,7 @@ export class Game {
     const winApp = document.createElement('win-app');
     const win = document.createElement('h2');
     win.innerHTML = `¡Enhorabuena! Has ganado jugador ${winPlayer}`;
+
     if (div !== null) {
       div.appendChild(winApp);
     }

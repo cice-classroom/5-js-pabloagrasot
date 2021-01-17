@@ -3,3 +3,4 @@ import './board-app';
 import './win-app';
 import './theme.css';
 import './game';
+import './counter';
