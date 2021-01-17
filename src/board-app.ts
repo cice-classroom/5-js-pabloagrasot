@@ -89,18 +89,15 @@ export class BoardApp extends LitElement {
 
   render() {
     return html` <section class="table">
-      <!-- prettier-ignore -->
       <div class="board ${this.boardClass}">
         ${board.map(
-        (player, index) =>
-          html`<div
-            @click="${() => this._onCellClicked(index)}"
-            id="${index}"
-            class="cell"
-          >
-            ${player}
-          </div>`,
-      )}
+          (player, index) =>
+            html` <!-- prettier-ignore -->
+              <div @click="${() =>
+                this._onCellClicked(
+                  index,
+                )}" id="${index}" class="cell">${player}</div>`,
+        )}
       </div>
     </section>`;
   }
