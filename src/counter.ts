@@ -44,7 +44,7 @@ export class Win extends LitElement {
 
         <div class="values">
           <h3 class="values__player">Jugador 0</h3>
-          <h3 class="values__value">1</h3>
+          <h3 class="values__value">0</h3>
         </div>
       </div>`;
   }
