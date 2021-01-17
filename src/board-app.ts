@@ -15,15 +15,13 @@ export class BoardApp extends LitElement {
   private readonly game = new Game();
 
   @property({ type: String })
-  cell!: string;
   boardClass: 'X' | 'O' = 'X';
-  css: string = '';
   player: Player | undefined;
 
   @property({ type: Number })
-  turn: number = 0;
-  valor: number = 0;
-  cellNumber: number = 0;
+  turn = 0;
+  valor = 0;
+  cellNumber = 0;
 
   static get styles() {
     return css`
@@ -92,7 +90,7 @@ export class BoardApp extends LitElement {
       <div class="board ${this.boardClass}">
         ${board.map(
           (player, index) =>
-            html`<div @click="${() =>this._onCellClicked(index,)}" id="${index}" class="cell">${player}</div>`,
+            html`<div @click="${() =>this._onCellClicked(index)}" id="${index}" class="cell">${player}</div>`,
         )}
       </div>
     </section>`;
