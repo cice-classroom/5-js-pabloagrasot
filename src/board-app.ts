@@ -21,9 +21,9 @@ export class BoardApp extends LitElement {
   player: Player | undefined;
 
   @property({ type: Number })
-  turn = 0;
-  valor = 0;
-  cellNumber = 0;
+  turn: number = 0;
+  valor: number = 0;
+  cellNumber: number = 0;
 
   static get styles() {
     return css`
