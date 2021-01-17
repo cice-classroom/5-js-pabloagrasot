@@ -13,7 +13,6 @@ export class Game {
       sessionStorage.setItem(winPlayer, `${this.counter}`);
       let key = Number(sessionStorage.getItem(winPlayer));
       if (key != global) {
-        console.log(key);
         key = key + 1;
         key = this.counter;
         sessionStorage.removeItem(winPlayer);
@@ -29,7 +28,6 @@ export class Game {
       sessionStorage.setItem(winPlayer, `${this.counter}`);
       let key = Number(sessionStorage.getItem(winPlayer));
       if (key != global) {
-        console.log(key);
         key = key + 1;
         key = this.counter;
         sessionStorage.removeItem(winPlayer);
@@ -45,7 +43,6 @@ export class Game {
       sessionStorage.setItem(winPlayer, `${this.counter}`);
       let key = Number(sessionStorage.getItem(winPlayer));
       if (key != global) {
-        console.log(key);
         key = key + 1;
         key = this.counter;
         sessionStorage.removeItem(winPlayer);
@@ -61,7 +58,6 @@ export class Game {
       sessionStorage.setItem(winPlayer, `${this.counter}`);
       let key = Number(sessionStorage.getItem(winPlayer));
       if (key != global) {
-        console.log(key);
         key = key + 1;
         key = this.counter;
         sessionStorage.removeItem(winPlayer);
@@ -77,7 +73,6 @@ export class Game {
       sessionStorage.setItem(winPlayer, `${this.counter}`);
       let key = Number(sessionStorage.getItem(winPlayer));
       if (key != global) {
-        console.log(key);
         key = key + 1;
         key = this.counter;
         sessionStorage.removeItem(winPlayer);
@@ -93,7 +88,6 @@ export class Game {
       sessionStorage.setItem(winPlayer, `${this.counter}`);
       let key = Number(sessionStorage.getItem(winPlayer));
       if (key != global) {
-        console.log(key);
         key = key + 1;
         key = this.counter;
         sessionStorage.removeItem(winPlayer);
@@ -109,7 +103,6 @@ export class Game {
       sessionStorage.setItem(winPlayer, `${this.counter}`);
       let key = Number(sessionStorage.getItem(winPlayer));
       if (key != global) {
-        console.log(key);
         key = key + 1;
         key = this.counter;
         sessionStorage.removeItem(winPlayer);
@@ -125,7 +118,6 @@ export class Game {
       sessionStorage.setItem(winPlayer, `${this.counter}`);
       let key = Number(sessionStorage.getItem(winPlayer));
       if (key != global) {
-        console.log(key);
         key = key + 1;
         key = this.counter;
         sessionStorage.removeItem(winPlayer);
