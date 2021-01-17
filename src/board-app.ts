@@ -86,17 +86,13 @@ export class BoardApp extends LitElement {
     this.turn++;
     this.game.hasWinner();
   }
-
+  // prettier-ignore
   render() {
     return html` <section class="table">
       <div class="board ${this.boardClass}">
         ${board.map(
           (player, index) =>
-            html` <!-- prettier-ignore -->
-              <div @click="${() =>
-                this._onCellClicked(
-                  index,
-                )}" id="${index}" class="cell">${player}</div>`,
+            html`<div @click="${() =>this._onCellClicked(index,)}" id="${index}" class="cell">${player}</div>`,
         )}
       </div>
     </section>`;
